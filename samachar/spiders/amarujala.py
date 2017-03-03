@@ -23,10 +23,10 @@ class AmarujalaSpider(scrapy.Spider):
         for news in news:
             item = SamacharItem()
             item['title'] = news.xpath("a/text()").extract_first()
-            item['url'] = news.xpath("a/@href").extract_first()
+            item['url'] = "http://www.amarujala.com" +news.xpath("a/@href").extract_first()
 
             if item['url']:
-                request = scrapy.Request(url="http://www.amarujala.com"+item['url'], callback=self.parse_detail_page, meta={'item':item}, dont_filter=True)   
+                request = scrapy.Request(url=item['url'], callback=self.parse_detail_page, meta={'item':item}, dont_filter=True)   
             request.meta['item'] =item
             yield request
 
