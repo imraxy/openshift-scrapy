@@ -9,7 +9,7 @@ from samachar.items import SamacharItem
 import re
 import sys
 
-class JagaranSpider(scrapy.Spider):
+class JagranSpider(scrapy.Spider):
     name = "jagran"
     allowed_domains = ["jagran.com"]
     start_urls = (
