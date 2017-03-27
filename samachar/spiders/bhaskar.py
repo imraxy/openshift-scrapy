@@ -39,7 +39,7 @@ class BhaskarSpider(scrapy.Spider):
     def parse_detail_page(self, response):
         item = response.meta['item']
         detailPageSelector = Selector(response)
-        item['description'] = detailPageSelector.xpath('//div[@id="fontSize-2"]/div').extract()[0]
+        item['description'] = detailPageSelector.xpath('//div[@id="fontSize-2" or @class="mainText"]/div').extract_first()
         
         yield item
 

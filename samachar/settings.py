@@ -73,7 +73,7 @@ ITEM_PIPELINES = {'samachar.pipelines.MongoDBPipeline': 300,}
 
 MONGODB_SERVER = "localhost"
 MONGODB_PORT = 27017
-MONGODB_DB = "sampledb"
+MONGODB_DB = "heroku_lvgq8rpr"
 MONGODB_COLLECTION = "news"
 
 MONGODB_USER = "user4GJ"
@@ -82,6 +82,7 @@ MONGODB_ADMIN_USER = "admin"
 MONGODB_ADMIN_PASSWORD = "kgqVa7wm55k2EgpC"
 MONGODB_URI = "mongodb://%s:%s@%s/?authSource=%s" % (
     quote_plus(MONGODB_USER), quote_plus(MONGODB_PASSWORD), MONGODB_SERVER, MONGODB_DB)
+MONGODB_URI = 'mongodb://heroku_lvgq8rpr:fhag0evmi17477e9eod4b52nei@ds141450.mlab.com:41450/heroku_lvgq8rpr'
 #MONGODB_URI = 'mongodb://user4GJ:VrQeO3TCYuJDkh4x@localhost:27017/?authSource=sampledb'
 
 
