@@ -22,7 +22,7 @@ class AmarujalaSpider(scrapy.Spider):
         print news
         for news in news:
             item = SamacharItem()
-            item['title'] = news.xpath("a/text()").extract_first()
+            item['title'] = news.xpath("normalize-space(a/text())").extract_first()
             item['url'] = "http://www.amarujala.com" +news.xpath("a/@href").extract_first()
 
             if item['url']:
@@ -34,7 +34,13 @@ class AmarujalaSpider(scrapy.Spider):
         item = response.meta['item']
         detailPageSelector = Selector(response)
         item['shortdesc'] = detailPageSelector.xpath("//h3[@id='desc']/text()").extract_first()
-        item['description'] = detailPageSelector.xpath("//h3[@id='desc']/text()").extract_first()
+        
+        if detailPageSelector.xpath("//h3[@id='desc']/text()").extract_first():
+            item['description'] = detailPageSelector.xpath("//h3[@id='desc']/text()").extract_first()
+
+        else:
+            item['description'] = detailPageSelector.xpath("//div[@class='desc']/div/text()").extract_first()
+
 
         item['img_title'] = detailPageSelector.xpath("//img[@id='myImage']/@title").extract_first()
 
