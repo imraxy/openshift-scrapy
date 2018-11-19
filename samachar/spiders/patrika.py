@@ -13,16 +13,16 @@ class PatrikaSpider(scrapy.Spider):
     name = "patrika"
     allowed_domains = ["patrika.com"]
     start_urls = (
-        'http://www.patrika.com/feature/duniya-ajab-gajab/',
+        'https://www.patrika.com/weird-news/',
     )
 
     def parse(self, response):
      
-        news = Selector(response).xpath("//span[@class='list-con-heading']")
+        news = Selector(response).xpath("//figcaption[@class='figure-caption']")
         print news
         for news in news:
             item = SamacharItem()
-            item['title'] = news.xpath("a/text()").extract_first()
+            item['title'] = news.xpath("a/span/text()").extract_first()
             item['url'] = news.xpath("a/@href").extract_first()
 
             if item['url']:
@@ -34,17 +34,17 @@ class PatrikaSpider(scrapy.Spider):
         item = response.meta['item']
         detailPageSelector = Selector(response)
         
-        if detailPageSelector.xpath("//div[@class='storyhead']/span/text()").extract_first():
-            item['shortdesc'] = detailPageSelector.xpath("//div[@class='storyhead']/span/text()").extract_first()
-            item['description'] = detailPageSelector.xpath("//div[@class='storyhead']/span/text()").extract_first()
+        if detailPageSelector.xpath("//div[@class='story-heading pos-relative orig-story']/h1/text()").extract_first():
+            item['shortdesc'] = detailPageSelector.xpath("//div[@class='story-heading pos-relative orig-story']/h1/text()").extract_first()
+            item['description'] = detailPageSelector.xpath("//div[@class='story-heading pos-relative orig-story']/h1/text()").extract_first()
         else:
             item['shortdesc'] = "No Description"
             item['description'] = "No Description"
 
-        item['img_title'] = detailPageSelector.xpath("//img[@class='leadPic']/@alt").extract_first()
+        item['img_title'] = detailPageSelector.xpath("//div[@id='image-video-section']/img/@alt").extract_first()
 
-        if detailPageSelector.xpath("//img[@class='leadPic']/@src").extract_first():
-            item['img_urls'] = detailPageSelector.xpath("//img[@class='leadPic']/@src").extract_first()
+        if detailPageSelector.xpath("//div[@id='image-video-section']/img/@src").extract_first():
+            item['img_urls'] = detailPageSelector.xpath("//div[@id='image-video-section']/img/@src").extract_first()
         else:
             item['img_urls'] = "No Image!"
         

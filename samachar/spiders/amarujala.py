@@ -18,7 +18,7 @@ class AmarujalaSpider(scrapy.Spider):
 
     def parse(self, response):
      
-        news = Selector(response).xpath("//ul[@class='relNws']/li")
+        news = Selector(response).xpath("//div[@class='image-caption']/h3")
         print news
         for news in news:
             item = SamacharItem()

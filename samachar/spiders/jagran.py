@@ -13,12 +13,12 @@ class JagranSpider(scrapy.Spider):
     name = "jagran"
     allowed_domains = ["jagran.com"]
     start_urls = (
-        'http://www.jagran.com',
+        'https://www.jagran.com/feature-news-hindi.html',
     )
 
     def parse(self, response):
      
-        news = Selector(response).xpath("//ul[@class='jagran-vishesh-list']/li")
+        news = Selector(response).xpath("//ul[@class='topicList']/li")
         print news
         for news in news:
             item = SamacharItem()
@@ -34,12 +34,12 @@ class JagranSpider(scrapy.Spider):
         item = response.meta['item']
         detailPageSelector = Selector(response)
         
-        if detailPageSelector.xpath("//ul[@id='output']/li/div/p/text()").extract_first():
-            item['shortdesc'] = detailPageSelector.xpath("//ul[@id='output']/li/div/p/text()").extract_first()
-            item['description'] = detailPageSelector.xpath("//ul[@id='output']/li/div/p/text()").extract_first()
+        if detailPageSelector.xpath("//figure[@class='bodySummery']/figcaption/text()").extract_first():
+            item['shortdesc'] = detailPageSelector.xpath("//figure[@class='bodySummery']/figcaption/text()").extract_first()
+            item['description'] = detailPageSelector.xpath("//div[@class='articleBody']/p[2]").extract_first()
         else:
-            item['shortdesc'] = detailPageSelector.xpath("//div[@class='lt-image']/p/text()").extract_first()
-            item['description'] = detailPageSelector.xpath("//div[@class='lt-image']/p/text()").extract_first()
+            item['shortdesc'] = detailPageSelector.xpath("//div[@id='topHeading']/h1/text()").extract_first()
+            item['description'] = detailPageSelector.xpath("//div[@class='articleBody']/p/text()").extract_first()
 
         item['img_title'] = detailPageSelector.xpath("//ul[@id='output']/li/a/@title").extract_first()
 
