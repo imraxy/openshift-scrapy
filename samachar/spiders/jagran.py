@@ -22,8 +22,8 @@ class JagranSpider(scrapy.Spider):
         print news
         for news in news:
             item = SamacharItem()
-            item['title'] = news.xpath("a/text()").extract_first()
-            item['url'] = news.xpath("a/@href").extract_first()
+            item['title'] = news.xpath("a/div[@class='protxt fr']/div[@class='h3']/text()").extract_first()
+            item['url'] = 'https://www.jagran.com' + news.xpath("a/@href").extract_first()
 
             if item['url']:
                 request = scrapy.Request(url=item['url'], callback=self.parse_detail_page, meta={'item':item}, dont_filter=True)   
@@ -43,8 +43,8 @@ class JagranSpider(scrapy.Spider):
 
         item['img_title'] = detailPageSelector.xpath("//ul[@id='output']/li/a/@title").extract_first()
 
-        if detailPageSelector.xpath("//ul[@id='output']/li/a/img/@src").extract_first():
-            item['img_urls'] = detailPageSelector.xpath("//ul[@id='output']/li/a/img/@src").extract_first()
+        if detailPageSelector.xpath("//img[@id='jagran_image_id']/@src").extract_first():
+            item['img_urls'] = detailPageSelector.xpath("//img[@id='jagran_image_id']/@src").extract_first()
         else:
             item['img_urls'] = detailPageSelector.xpath("//div[@class='lt-image']/img/@src").extract_first()
         
