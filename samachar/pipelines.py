@@ -28,6 +28,25 @@ class MongoDBPipeline(object):
         self.collection = db[settings['MONGODB_COLLECTION']]
 
     def process_item(self, item, spider):
+
+        if item['title']:
+            item['title'] = item['title'].strip()
+
+        if item['url']:    
+            item['url']  = item['url'].strip()
+        
+        if item['img_urls']:    
+            item['img_urls'] = item['img_urls'].strip()
+
+        if item['img_title']:    
+            item['img_title'] = item['img_title'].strip()
+        
+        if item['shortdesc']:
+            item['shortdesc'] = item['shortdesc'].strip()
+        
+        if item['description']:    
+            item['description'] = item['description'].strip()
+
     	print "in process_item method"
         valid = True
         for data in item:
@@ -36,7 +55,8 @@ class MongoDBPipeline(object):
                 raise DropItem("Missing {0}!".format(data))
         if valid:
             try:
-                self.collection.insert(dict(item))
+                #self.collection.insert(dict(item))
+                self.collection.update({"url":item['url']},dict(item), upsert=True )
                 logging.log(logging.DEBUG, "News added to MongoDB database!")
 
             except pymongo.errors.DuplicateKeyError:

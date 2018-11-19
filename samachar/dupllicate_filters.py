@@ -11,7 +11,6 @@ class CustomFilter(RFPDupeFilter):
     
         #url ='http://www.thebarcodewarehouse.co.uk/labels-and-ribbons/self-adhesive-labels/zebra-labels/800283-205/'
         #url = 'http://www.thebarcodewarehouse.co.uk/search-results/?searchterm=GK42-102520-000+&searchterm_submit=Search'
-
         if 'searchterm' in url:
             url_list = url.split("=")
             url_list = filter(None, url_list)
