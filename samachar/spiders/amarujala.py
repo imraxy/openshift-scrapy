@@ -33,10 +33,10 @@ class AmarujalaSpider(scrapy.Spider):
     def parse_detail_page(self, response):
         item = response.meta['item']
         detailPageSelector = Selector(response)
-        item['shortdesc'] = detailPageSelector.xpath("//h3[@id='desc']/text()").extract_first()
+        item['shortdesc'] = detailPageSelector.xpath("//div[@id='desc']/div/text()").extract_first()
         
-        if detailPageSelector.xpath("//h3[@id='desc']/text()").extract_first():
-            item['description'] = detailPageSelector.xpath("//h3[@id='desc']/text()").extract_first()
+        if detailPageSelector.xpath("//div[@id='desc']/div/text()").extract_first():
+            item['description'] = detailPageSelector.xpath("//div[@id='desc']/div/text()").extract_first()
 
         else:
             item['description'] = detailPageSelector.xpath("//div[@class='desc']/div/text()").extract_first()
