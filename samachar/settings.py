@@ -82,8 +82,9 @@ MONGODB_ADMIN_USER = "admin"
 MONGODB_ADMIN_PASSWORD = "kgqVa7wm55k2EgpC"
 MONGODB_URI = "mongodb://%s:%s@%s/?authSource=%s" % (
     quote_plus(MONGODB_USER), quote_plus(MONGODB_PASSWORD), MONGODB_SERVER, MONGODB_DB)
-MONGODB_URI = 'mongodb://heroku_lvgq8rpr:fhag0evmi17477e9eod4b52nei@ds141450.mlab.com:41450/heroku_lvgq8rpr'
+#MONGODB_URI = 'mongodb://heroku_lvgq8rpr:fhag0evmi17477e9eod4b52nei@ds141450.mlab.com:41450/heroku_lvgq8rpr'
 #MONGODB_URI = 'mongodb://user4GJ:VrQeO3TCYuJDkh4x@localhost:27017/?authSource=sampledb'
+MongoDB_URI = 'mongodb://heroku_lvgq8rpr:fhag0evmi17477e9eod4b52nei@heroku-lvgq8rpr-shard-00-00.sljw0.mongodb.net:27017,heroku-lvgq8rpr-shard-00-01.sljw0.mongodb.net:27017,heroku-lvgq8rpr-shard-00-02.sljw0.mongodb.net:27017/heroku_lvgq8rpr?ssl=true&replicaSet=atlas-i6naha-shard-0&authSource=admin&retryWrites=true&w=majority'
 
 
 # Enable and configure the AutoThrottle extension (disabled by default)
