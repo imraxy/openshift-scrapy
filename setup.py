@@ -10,8 +10,8 @@ setup(name='openshift-scrapy',
       # containing this fix: https://github.com/scrapy/scrapyd/issues/49 (probably 1.0.2)
       # and to do it so, we specify it in requirements.txt to force version override
       install_requires=[
-        'Scrapy',
-        'service_identity', 
-        #'Scrapyd>1.0.1',
+          'Scrapy',
+          'service_identity',
+          # 'Scrapyd>1.0.1',
       ],
-     )
+      )

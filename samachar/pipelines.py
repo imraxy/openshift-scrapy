@@ -13,7 +13,9 @@
 import pymongo
 import logging
 
-from scrapy.conf import settings
+#from scrapy.conf import settings
+from scrapy.utils.project import get_project_settings
+settings = get_project_settings()
 from scrapy.exceptions import DropItem
 
 
@@ -32,22 +34,22 @@ class MongoDBPipeline(object):
         if item['title']:
             item['title'] = item['title'].strip()
 
-        if item['url']:    
-            item['url']  = item['url'].strip()
-        
-        if item['img_urls']:    
+        if item['url']:
+            item['url'] = item['url'].strip()
+
+        if item['img_urls']:
             item['img_urls'] = item['img_urls'].strip()
 
-        if item['img_title']:    
+        if item['img_title']:
             item['img_title'] = item['img_title'].strip()
-        
+
         if item['shortdesc']:
             item['shortdesc'] = item['shortdesc'].strip()
-        
-        if item['description']:    
+
+        if item['description']:
             item['description'] = item['description'].strip()
 
-    	print("in process_item method")
+        print("in process_item method")
         valid = True
         for data in item:
             if not data:
@@ -55,12 +57,11 @@ class MongoDBPipeline(object):
                 raise DropItem("Missing {0}!".format(data))
         if valid:
             try:
-                #self.collection.insert(dict(item))
-                self.collection.update({"url":item['url']},dict(item), upsert=True )
+                # self.collection.insert(dict(item))
+                self.collection.update(
+                    {"url": item['url']}, dict(item), upsert=True)
                 logging.log(logging.DEBUG, "News added to MongoDB database!")
 
             except pymongo.errors.DuplicateKeyError:
                 pass
         return item
-    
-
