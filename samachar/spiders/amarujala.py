@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import scrapy
 import logging
-import urlparse
+import urllib.parse
 
 from scrapy.spiders import Spider
 from scrapy.selector import Selector
@@ -19,7 +19,7 @@ class AmarujalaSpider(scrapy.Spider):
     def parse(self, response):
      
         news = Selector(response).xpath("//div[@class='image-caption']/h3")
-        print news
+        print(news)
         for news in news:
             item = SamacharItem()
             item['title'] = news.xpath("normalize-space(a/text())").extract_first()

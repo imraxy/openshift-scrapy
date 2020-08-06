@@ -9,7 +9,7 @@
 #     http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
 #     http://scrapy.readthedocs.org/en/latest/topics/spider-middleware.html
 #import os
-from urllib import quote_plus
+from urllib.parse import quote_plus
 BOT_NAME = 'samachar'
 
 SPIDER_MODULES = ['samachar.spiders']
@@ -81,9 +81,9 @@ MONGODB_USER = "user4GJ"
 MONGODB_PASSWORD = "VrQeO3TCYuJDkh4x"
 MONGODB_ADMIN_USER = "admin"
 MONGODB_ADMIN_PASSWORD = "kgqVa7wm55k2EgpC"
-#MONGODB_URI = "mongodb://%s:%s@%s/?authSource=%s" % (quote_plus(MONGODB_USER), quote_plus(MONGODB_PASSWORD), MONGODB_SERVER, MONGODB_DB)
+MONGODB_URI = "mongodb://%s:%s@%s/?authSource=%s" % (quote_plus(MONGODB_USER), quote_plus(MONGODB_PASSWORD), MONGODB_SERVER, MONGODB_DB)
 
-MONGODB_URI = os.environ['MONGODB_URI']
+#MONGODB_URI = os.environ['MONGODB_URI']
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html

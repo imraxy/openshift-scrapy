@@ -47,7 +47,7 @@ class MongoDBPipeline(object):
         if item['description']:    
             item['description'] = item['description'].strip()
 
-    	print "in process_item method"
+    	print("in process_item method")
         valid = True
         for data in item:
             if not data:

@@ -13,12 +13,12 @@ class CustomFilter(RFPDupeFilter):
         #url = 'http://www.thebarcodewarehouse.co.uk/search-results/?searchterm=GK42-102520-000+&searchterm_submit=Search'
         if 'searchterm' in url:
             url_list = url.split("=")
-            url_list = filter(None, url_list)
+            url_list = [_f for _f in url_list if _f]
             mm = url_list[1]
             #print url_list[1].split("+")[0]
         else:
             url_list = url.split("/")
-            url_list = filter(None, url_list)
+            url_list = [_f for _f in url_list if _f]
             mm = url_list[-1]
         return mm
 

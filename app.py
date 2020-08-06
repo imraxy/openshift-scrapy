@@ -14,7 +14,7 @@ if __name__ == '__main__':
   }
 
   scrapyd_conf = "[scrapyd]\n" + \
-    "\n".join('{}={}'.format(key, val) for key, val in config_values.items())
+    "\n".join('{}={}'.format(key, val) for key, val in list(config_values.items()))
  
   with open('scrapyd.conf', 'w') as f:
     f.write(scrapyd_conf)

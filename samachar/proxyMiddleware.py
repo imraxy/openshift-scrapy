@@ -11,7 +11,7 @@ class ProxyMiddleware(HttpProxyMiddleware):
         ip = random.choice(self.proxy_list)
         if ip:
             request.meta['proxy']= ip
-            spider.log(u'proxy-ip: {} {}'.format(request.meta['proxy'], request))
+            spider.log('proxy-ip: {} {}'.format(request.meta['proxy'], request))
    
     '''def process_request(self, request, spider):
         agent = random.choice(AGENTS)

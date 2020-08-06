@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import scrapy
 import logging
-import urlparse
+import urllib.parse
 
 from scrapy.spiders import Spider
 from scrapy.selector import Selector
